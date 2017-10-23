@@ -3,7 +3,7 @@ import multer from "multer";
 import fs from "fs";
 import * as PDFTOTEXT from "child_process";
 
-const UPLOAD = multer({dest: 'uploads/'}).single('pdf');
+const UPLOAD = multer({dest: 'public/uploads/'}).single('pdf');
 
 module.exports = app => {
 
