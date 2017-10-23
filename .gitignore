@@ -13,3 +13,6 @@ ecosystem.config.js
 
 #IDE metadata
 .idea/
+
+#Ignore public uploads
+/public/uploads/*.*
