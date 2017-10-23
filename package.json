@@ -18,8 +18,8 @@
     "start": "babel-node server.js"
   },
   "repository" :
-  { "type" : "git"
-  , "url" : "https://github.com/malahovKS/pdf-extract-api.git"
+  { "type" : "git",
+    "url" : "https://github.com/malahovKS/pdf-extract-api.git"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
