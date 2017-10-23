@@ -1,0 +1,36 @@
+{
+  "name": "pdf-extract-api",
+  "keywords": [
+    "service",
+    "microservice",
+    "pdf",
+    "pdftotext",
+    "txt",
+    "text",
+    "extract",
+    "api"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "kirill-malakhov",
+  "main": "server.js",
+  "scripts": {
+    "start": "babel-node server.js"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "consign": "^0.1.6",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "multer": "^1.3.0",
+    "path": "^0.12.7",
+    "winston": "^2.4.0"
+  },
+  "engines": {
+    "node": "^6.11.0"
+  }
+}

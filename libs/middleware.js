@@ -1,0 +1,40 @@
+import compression from "compression";
+import cors from "cors";
+import bodyParser from "body-parser";
+import log from "../libs/log";
+import morgan from "morgan";
+
+module.exports = app => {
+	app.set("port", 3000);
+	app.set("json spaces", 4);
+	app.disable('x-powered-by');
+	app.use(compression());
+	app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+	app.use(bodyParser.json({limit: '5mb'}));
+	app.use(bodyParser.text({limit: '5mb'}));
+	app.use('/api', cors({
+		methods:["POST", "GET"]
+	}));
+
+	//log each request
+	//:remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"
+	app.use(morgan("combined", {
+		stream: {
+			write: (message) => {
+				log.debug(message.trim());
+			}
+		}
+	}));
+
+	//--- catch 404 & 500
+	app.use((req, res, next) => {
+		res.sendStatus(404);
+		log.error('404 URL not found: %s', req.url);
+	});
+	// Internal Server Error; Generic error message when server fails
+	app.use((err, req, res, next) => {
+		res.sendStatus(500);
+		log.error('500 Internal error(%d): %s', res.statusCode, err);
+	});
+	//--- catch 404 & 500
+};
