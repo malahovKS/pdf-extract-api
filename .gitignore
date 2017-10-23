@@ -15,4 +15,4 @@ ecosystem.config.js
 .idea/
 
 #Ignore public uploads
-/public/uploads/*.*
+/public/uploads/*
