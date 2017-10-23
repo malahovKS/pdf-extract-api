@@ -25,7 +25,7 @@ module.exports = app => {
 		PDFTOTEXT.exec("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.originalname, (error, stdout, stderr) => {
 
 			if (error) {
-				fs.unlink(req.file.path);
+				fs.unlink(req.file.path); 
 				res.sendStatus(500);
 				log.error(error);
 				return log.error(stderr);
