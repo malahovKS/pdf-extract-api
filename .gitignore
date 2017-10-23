@@ -3,3 +3,6 @@ npm-debug.log
 .DS_Store
 ecosystem.config.js
 /*.env
+
+#IDE metadata
+.idea/
