@@ -9,7 +9,7 @@ module.exports = app => {
 
 	app.get("/api/pdftotext", (req, res) => {
 		res.json({status: "PDF to Text API"});
-		res.flush();
+		res.flush(); //TODO review this
 	});
 
 	app.post("/api/pdftotext", UPLOAD, (req, res) => {
