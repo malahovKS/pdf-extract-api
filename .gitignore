@@ -1,7 +1,14 @@
+#Node modules
 /node_modules
+
 npm-debug.log
+
+#Macos Finder file
 .DS_Store
+
+#PM2 deployment config
 ecosystem.config.js
+
 /*.env
 
 #IDE metadata
