@@ -1,5 +1,6 @@
 {
   "name": "pdf-extract-api",
+  "description": "RESTful API for text extraction from pdf",
   "keywords": [
     "service",
     "microservice",
