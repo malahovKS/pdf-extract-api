@@ -9,7 +9,10 @@ module.exports = app => {
 
 	app.get("/api/pdftotext", (req, res) => {
 		res.json({status: "PDF to Text API"});
-		// res.flush(); //TODO review this
+
+		//TODO res.flush() (node:28258) DeprecationWarning: OutgoingMessage.flush is deprecated. Use flushHeaders instead.
+		// res.flush();
+
 	});
 
 	app.post("/api/pdftotext", UPLOAD, (req, res) => {
@@ -22,24 +25,25 @@ module.exports = app => {
 			return log.error("400 Error: File upload only supports .pdf filetype");
 		}
 
-		PDFTOTEXT.exec("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", (error, stdout, stderr) => {
+		PDFTOTEXT.exec("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", {maxBuffer: 1000 * 1024},
+			(error, stdout, stderr) => {
 
-			if (error) {
+				if (error) {
+					fs.unlink(req.file.path);
+					res.sendStatus(500);
+					log.error(error);
+					return log.error(stderr);
+				}
+
+				log.info(req.file.originalname + " Done!");
+				log.debug("\n" + stdout);
+
 				fs.unlink(req.file.path);
-				res.sendStatus(500);
-				log.error(error);
-				return log.error(stderr);
-			}
+				res.type('text/html');
+				res.status(200).send(stdout);
+				res.flush();
 
-			log.info(req.file.originalname + "Done!");
-			log.debug(stdout);
-
-			fs.unlink(req.file.path);
-			res.type('text/html');
-			res.status(200).send(stdout);
-			res.flush();
-
-		})
+			})
 
 
 	});
