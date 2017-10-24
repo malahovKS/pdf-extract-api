@@ -31,8 +31,13 @@ module.exports = app => {
 				return log.error(stderr);
 			}
 
+			log.info(req.file.originalname + "Done!");
 			log.debug(stdout);
 
+			fs.unlink(req.file.path);
+			res.type('text/html');
+			res.status(200).send(stdout);
+			res.flush();
 
 		})
 
