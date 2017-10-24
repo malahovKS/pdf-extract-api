@@ -13,7 +13,7 @@ module.exports = app => {
 	app.use(morgan("combined", {
 		stream: log.stream
 	}));
-	
+
 	app.disable('x-powered-by');
 	app.use(compression());
 	app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
