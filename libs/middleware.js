@@ -7,6 +7,13 @@ import morgan from "morgan";
 module.exports = app => {
 	app.set("port", 3000);
 	app.set("json spaces", 4);
+
+	//log each request
+	//:remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"
+	app.use(morgan("combined", {
+		stream: log.stream
+	}));
+	
 	app.disable('x-powered-by');
 	app.use(compression());
 	app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
@@ -14,12 +21,6 @@ module.exports = app => {
 	app.use(bodyParser.text({limit: '5mb'}));
 	app.use('/api', cors({
 		methods:["POST", "GET"]
-	}));
-
-	//log each request
-	//:remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"
-	app.use(morgan("combined", {
-		stream: log.stream
 	}));
 
 	//--- catch 404 & 500
