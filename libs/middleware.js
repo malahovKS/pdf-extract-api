@@ -11,8 +11,13 @@ module.exports = app => {
 	//log each request
 	//:remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"
 	app.use(morgan("combined", {
-		stream: log.stream
-	}));
+			stream: {
+				write: function (message,) {
+					log.debug(message.trim());
+				}
+			}
+		}
+	));
 
 	app.disable('x-powered-by');
 	app.use(compression());
