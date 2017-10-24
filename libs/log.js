@@ -2,8 +2,7 @@ import winston from "winston";
 
 winston.emitErrs = true;
 const tsFormat = () => (new Date().toLocaleString());
-
-module.exports = new winston.Logger({
+const log = new winston.Logger({
 	transports: [
 		// new winston.transports.File({
 		// 	level: 'info',
@@ -26,6 +25,13 @@ module.exports = new winston.Logger({
 	],
 	exitOnError: false
 });
+
+module.exports = log;
+module.exports.stream = {
+	write: function (message, encoding) {
+		log.debug(message);
+	}
+};
 
 
 
