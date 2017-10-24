@@ -22,7 +22,7 @@ module.exports = app => {
 			return log.error("400 Error: File upload only supports .pdf filetype");
 		}
 
-		PDFTOTEXT.exec("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.original + " -", (error, stdout, stderr) => {
+		PDFTOTEXT.exec("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", (error, stdout, stderr) => {
 
 			if (error) {
 				fs.unlink(req.file.path);
