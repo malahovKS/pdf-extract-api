@@ -8,7 +8,7 @@ const UPLOAD = multer({dest: 'public/uploads/'}).single('pdf');
 module.exports = app => {
 
 	app.get("/api/pdftotext", (req, res) => {
-		res.json({status: "PDF to Text API"});
+		res.json({status: "PDF to text/html API"});
 
 		//TODO res.flush() (node:28258) DeprecationWarning: OutgoingMessage.flush is deprecated. Use flushHeaders instead.
 		// res.flush();
