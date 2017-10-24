@@ -29,7 +29,7 @@ const log = new winston.Logger({
 module.exports = log;
 module.exports.stream = {
 	write: function (message, encoding) {
-		log.debug(message);
+		log.debug(message.trim());
 	}
 };
 
