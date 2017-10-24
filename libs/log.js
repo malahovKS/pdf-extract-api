@@ -19,12 +19,23 @@ const log = new winston.Logger({
 			prettyPrint: true,
 			handleExceptions: true,
 			timestamp: tsFormat,
-			//label: module.filename.split('/').slice(-2).join('/'),
-			level: 'debug'
+			level: 'info'
 		})
 	],
 	exitOnError: false
 });
+
+if (process.env.NODE_ENV !== 'production') {
+	log.add(new winston.transports.Console({
+		colorize: true,
+		json: false,
+		prettyPrint: true,
+		handleExceptions: true,
+		timestamp: tsFormat,
+		//label: module.filename.split('/').slice(-2).join('/'),
+		level: 'debug'
+	}));
+}
 
 module.exports = log;
 module.exports.stream = {
