@@ -31,6 +31,8 @@ module.exports = app => {
 				return log.error(stderr);
 			}
 
+			log.debug(stdout);
+
 
 		})
 
