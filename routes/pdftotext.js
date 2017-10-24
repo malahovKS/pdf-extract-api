@@ -40,7 +40,7 @@ module.exports = app => {
 
 				fs.unlink(req.file.path);
 				res.type('text/html');
-				res.status(200).send(stdout);
+				res.status(200).send(stdout.trim());
 				res.flush();
 
 			})
