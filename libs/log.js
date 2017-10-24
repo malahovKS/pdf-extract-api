@@ -3,7 +3,7 @@ import winston from "winston";
 winston.emitErrs = true;
 const tsFormat = () => (new Date().toLocaleString());
 
-const LOGGER  = new winston.Logger({
+const logger = new winston.Logger({
 	transports: [
 		// new winston.transports.File({
 		// 	level: 'info',
@@ -27,10 +27,10 @@ const LOGGER  = new winston.Logger({
 	exitOnError: false
 });
 
-module.exports = LOGGER;
+module.exports = logger;
 module.exports.stream = {
 	write: function(message, encoding){
-		LOGGER.debug(message);
+		logger.debug(message.trim());
 	}
 };
 

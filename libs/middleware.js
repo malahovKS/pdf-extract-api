@@ -19,11 +19,7 @@ module.exports = app => {
 	//log each request
 	//:remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"
 	app.use(morgan("combined", {
-		stream: {
-			write: (message) => {
-				log.debug(message.trim());
-			}
-		}
+		stream: log.stream
 	}));
 
 	//--- catch 404 & 500
