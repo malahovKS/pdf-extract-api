@@ -21,7 +21,6 @@ module.exports = app => {
 
 	app.disable('x-powered-by');
 	app.use(compression());
-	app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 	app.use(bodyParser.json({limit: '5mb'}));
 	app.use(bodyParser.text({limit: '5mb'}));
 	app.use('/api', cors({
