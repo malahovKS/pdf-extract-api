@@ -6,11 +6,12 @@
     "microservice",
     "pdf",
     "pdftotext",
-    "txt",
     "text",
     "extract",
     "api",
-    "extract-data"
+    "extract-data",
+    "restful-api",
+    "rest-api"
   ],
   "version": "1.0.0",
   "license": "Apache-2.0",
