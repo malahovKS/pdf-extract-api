@@ -1,4 +1,4 @@
-import log from "./log.js";
+import log from "../libs/log";
 
 module.exports = app => {
 	app.listen(app.get("port"), () => {
