@@ -9,7 +9,7 @@ const UPLOAD = multer({dest: 'public/uploads/'}).single('pdf');
 module.exports = app => {
 
 	app.get("/api/pdftotext", (req, res) => {
-		res.status(200).json({status: "PDF to text/html API"});
+		return res.status(200).json({status: "PDF to text/html API"});
 
 		//TODO res.flush() (node:28258) DeprecationWarning: OutgoingMessage.flush is deprecated. Use flushHeaders instead.
 		// res.flush();
@@ -50,7 +50,7 @@ module.exports = app => {
 					})
 			}).catch(() => {
 			fs.unlink(req.file.path);
-			res.status(500).json({error: "Command pdftotext doesn't exist"});
+			res.status(500);
 			return log.error("500 Error: Command pdftotext doesn't exist");
 		});
 	});

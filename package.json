@@ -6,10 +6,12 @@
     "microservice",
     "pdf",
     "pdftotext",
-    "txt",
     "text",
     "extract",
-    "api"
+    "api",
+    "extract-data",
+    "restful-api",
+    "rest-api"
   ],
   "version": "1.0.0",
   "license": "Apache-2.0",
@@ -17,11 +19,12 @@
   "main": "server.js",
   "scripts": {
     "start": "babel-node server.js",
-    "start-production": "NODE_ENV=production babel-node server.js"
+    "start-production": "NODE_ENV=production babel-node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/malahovKS/pdf-extract-api.git"
+    "url": "git+https://github.com/malahovKS/pdf-extract-api.git"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
