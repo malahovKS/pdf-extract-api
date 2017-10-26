@@ -8,6 +8,7 @@ if (process.env.NODE_ENV === 'production') {
 	log.add(winston.transports.Console, {
 		colorize: true,
 		prettyPrint: true,
+		handleExceptions: true,
 		timestamp: tsFormat,
 		level: 'error'
 	});

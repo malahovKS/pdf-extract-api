@@ -18,8 +18,8 @@
   "author": "kirill-malakhov",
   "main": "server.js",
   "scripts": {
-    "start": "babel-node server.js",
-    "start-production": "NODE_ENV=production babel-node server.js",
+    "start": "PORT=3000 babel-node server.js",
+    "start-production": " PORT=3000 NODE_ENV=production babel-node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
