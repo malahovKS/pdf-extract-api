@@ -12,7 +12,7 @@ module.exports = app => {
 	 * @api {post} /api/pdftotext pdf file to text/plain
 	 * @apiParam {multipart/form-data} pdf pdf file
 	 * @apiGroup Convert
-	 * @apiSuccess {String} body raw text/plain
+	 * @apiSuccess {text/plain} body raw text
 	 */
 	app.post("/api/pdftotext", UPLOAD, (req, res) => {
 
