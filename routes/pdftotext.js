@@ -8,10 +8,6 @@ const UPLOAD = multer({dest: 'public/uploads/'}).single('pdf');
 
 module.exports = app => {
 
-	app.get("/api/pdftotext", (req, res) => {
-		return res.status(200).json({status: "OK"});
-	});
-
 	app.post("/api/pdftotext", UPLOAD, (req, res) => {
 
 		log.debug(req.headers);
