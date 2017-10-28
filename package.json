@@ -1,6 +1,6 @@
 {
   "name": "pdf-extract-api",
-  "description": "RESTful API for text extraction from pdf",
+  "description": "PDF to text/plain API",
   "keywords": [
     "service",
     "microservice",
@@ -13,7 +13,7 @@
     "restful-api",
     "rest-api"
   ],
-  "version": "1.0.0",
+  "version": "0.1.0",
   "license": "Apache-2.0",
   "author": "kirill-malakhov",
   "main": "server.js",
@@ -24,7 +24,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "apidoc": {
-    "name": "Atomic Web Service (REST API) for converting PDF files to text/plain - Documentation",
+    "name": "Atomic Web Service for converting PDF files to text/plain - Documentation",
     "template": {
       "forceLanguage": "en"
     }
