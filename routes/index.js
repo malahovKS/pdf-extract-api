@@ -6,6 +6,9 @@ module.exports = app => {
 	 * @apiSuccessExample {json} Success-Response:
 	 * HTTP/1.1 200 OK
 	 * {"status": "pdf-extract-api"}
+	 * @apiError UrlNotFound
+	 * @apiErrorExample Error-Response:
+	 * HTTP/1.1 404 Not Found
 	 */
 	app.get("/", (req, res) => {
 		return res.status(200).json({status: "pdf-extract-api"});

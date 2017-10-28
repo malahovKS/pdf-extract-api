@@ -8,6 +8,12 @@ const UPLOAD = multer({dest: 'public/uploads/'}).single('pdf');
 
 module.exports = app => {
 
+	/**
+	 * @api {post} /api/pdftotext pdf file to text/plain
+	 * @apiParam {multipart/form-data} pdf pdf file
+	 * @apiGroup Convert
+	 * @apiSuccess {String} body raw text/plain
+	 */
 	app.post("/api/pdftotext", UPLOAD, (req, res) => {
 
 		log.debug(req.headers);
@@ -21,7 +27,7 @@ module.exports = app => {
 
 		commandExists('pdftotext')
 			.then(() => {
-				PDFTOTEXT.exec("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", {maxBuffer: 1000 * 1024},
+				PDFTOTEXT.exec("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", {maxBuffer: 3000 * 1024},
 					(error, stdout, stderr) => {
 
 						if (error) {
@@ -35,8 +41,7 @@ module.exports = app => {
 						log.debug("\n" + stdout);
 
 						fs.unlink(req.file.path);
-						res.type('text/plain');
-						res.status(200).send(stdout.trim());
+						res.status(200).json({text: stdout.trim()});
 						res.flush();
 
 					})
