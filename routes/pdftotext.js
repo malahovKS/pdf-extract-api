@@ -41,7 +41,8 @@ module.exports = app => {
 						log.debug("\n" + stdout);
 
 						fs.unlink(req.file.path);
-						res.status(200).json({text: stdout.trim()});
+						res.type('text/plain');
+						res.status(200).send(stdout.trim());
 						res.flush();
 
 					})
