@@ -10,3 +10,4 @@ $ cd pdf-extract-api
 $ npm install
 $ npm run start
 ```
+### Example use cases
