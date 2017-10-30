@@ -3,7 +3,6 @@
 #Check dependencies
 #Check Node
 if ! type "node" > /dev/null 2>&1;
- printf "\n Node + \n"
  then
     printf >&2 "node not found! Install? (y/n):";
     read -n1 REPLY
@@ -21,11 +20,11 @@ if ! type "node" > /dev/null 2>&1;
            exit 1 ;;
       *) exit 1 ;;
     esac
+ else  printf "\n node + \n"
 fi
 
 #Check pdftotext
 if ! type "pdftotext" > /dev/null 2>&1;
- printf "\n pdftotext + \n"
  then
     printf >&2 "pdftotext not found! Install? (y/n):";
     read -n1 REPLY
@@ -38,6 +37,7 @@ if ! type "pdftotext" > /dev/null 2>&1;
            exit 1 ;;
       *) exit 1 ;;
     esac
+ else printf "\n pdftotext + \n"
 fi
 
 #Install node_modules
