@@ -10,7 +10,7 @@ $ git clone https://github.com/malakhovks/pdf-extract-api.git
 $ cd pdf-extract-api
 $ ./install-dependencies.sh
 ```
-###Use
+### Use cases
 Run service on default PORT=3000 MODE=debug
 ```
 $ npm run start
