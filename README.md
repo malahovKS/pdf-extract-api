@@ -11,11 +11,11 @@ $ cd pdf-extract-api
 $ ./install-dependencies.sh
 ```
 ### Use cases
-Run service on default PORT=3000 MODE=debug
+Run service in DEBUG mode (default PORT=3000)
 ```
 $ npm run start
 ```
-Run service on default PORT=3000 MODE=production
+Run service in PRODUCTION mode (default PORT=3000)
 ```
 $ npm run start-production
 ```
