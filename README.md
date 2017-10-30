@@ -4,12 +4,13 @@ Part of the "Automated scientific research workstation" atomic web services ecos
 * [pdftotext](https://en.wikipedia.org/wiki/Pdftotext)
 * [Node.js](https://nodejs.org)
 ### Install
-Check all Requirements/Dependencies 
+Check all Requirements/Dependencies and install if not found
 ```
 $ git clone https://github.com/malakhovks/pdf-extract-api.git
 $ cd pdf-extract-api
 $ ./install-dependencies.sh
 ```
+###Use
 Run service on default PORT=3000 MODE=debug
 ```
 $ npm run start
@@ -18,4 +19,3 @@ Run service on default PORT=3000 MODE=production
 ```
 $ npm run start-production
 ```
-### Example use cases
