@@ -37,4 +37,5 @@ if ! type "pdftotext" > /dev/null 2>&1; then
 fi
 
 #Install node_modules
+printf "\nInstall node_modules . . .\n"
 npm install
