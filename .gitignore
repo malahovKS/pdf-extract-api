@@ -60,8 +60,6 @@ typings/
 #Macos Finder file
 .DS_Store
 
-#PM2 deployment config
-ecosystem.config.js
 
 /*.env
 

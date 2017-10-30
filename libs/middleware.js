@@ -3,6 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import log from "../libs/log";
 import morgan from "morgan";
+import express from "express";
 
 const port = process.env.PORT;
 
@@ -24,6 +25,7 @@ module.exports = app => {
 	app.use('/api', cors({
 		methods:["POST", "GET"]
 	}));
+	app.use(express.static("public"));
 
 	//--- catch 404 & 500
 	app.use((req, res) => {
