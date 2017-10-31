@@ -68,3 +68,5 @@ $ curl -X POST -F "pdf=@document.pdf" http://127.0.0.1:3000/api/pdftotext
 Content-Type: text/plain
 body: raw text
 ```
+
+#### [PM2](http://pm2.keymetrics.io/) usage. Run and config
