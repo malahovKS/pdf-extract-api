@@ -14,8 +14,6 @@ To run program you will need:
 
 ##### For [Ubuntu Server Linux](https://www.ubuntu.com/download/server) distribution
 
-Check all Requirements/Dependencies and install if not found:
-
 ```
 $ git clone https://github.com/malakhovks/pdf-extract-api.git
 $ cd pdf-extract-api
