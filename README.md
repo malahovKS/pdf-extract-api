@@ -1,6 +1,9 @@
 # Atomic Web Service (AWS, REST API) for converting PDF files to text/plain, powered by [pdftotext](https://en.wikipedia.org/wiki/Pdftotext) and [Node.js](https://nodejs.org)
+
 Part of the "Automated scientific research workstation" atomic web services ecosystem.
+
 ### Requirements/Dependencies
+
 Program runs on modern MacOS and Linux distributions.
 To run program you will need:
 
@@ -9,14 +12,14 @@ To run program you will need:
 
 ### Install
 
-##### For Ubuntu Server Linux distribution
+##### For [Ubuntu Server Linux](https://www.ubuntu.com/download/server) distribution
 
 Check all Requirements/Dependencies and install if not found
 
 ```
 $ git clone https://github.com/malakhovks/pdf-extract-api.git
 $ cd pdf-extract-api
-$ ./install-dependencies.sh
+$ ./install-dependencies-ubuntu.sh
 ```
 
 ### Use cases
