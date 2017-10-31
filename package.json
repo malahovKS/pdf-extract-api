@@ -32,8 +32,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/malahovKS/pdf-extract-api.git"
+    "url": "git+https://github.com/malakhovks/pdf-extract-api.git"
   },
+  "bugs": {
+    "url": "https://github.com/malakhovks/pdf-extract-api/issues"
+  },
+  "homepage": "https://github.com/malakhovks/pdf-extract-api#readme",
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
