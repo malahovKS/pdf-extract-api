@@ -19,6 +19,27 @@ $ git clone https://github.com/malakhovks/pdf-extract-api.git
 $ cd pdf-extract-api
 $ ./install-dependencies-ubuntu.sh
 ```
+### AWS Documentation with [apidoc](http://apidocjs.com/)
+
+##### Generate AWS documentation with [apidoc](http://apidocjs.com/):
+
+```
+$ npm run apidoc-generate
+```
+
+##### Use AWS [apidoc](http://apidocjs.com/) documentation:
+
+With cURL
+
+```
+$ curl -X GET http://127.0.0.1:3000/apidoc/
+```
+
+With web browser. Navigate to
+
+```
+http://127.0.0.1:3000/apidoc/
+```
 
 ### Use cases
 
@@ -59,7 +80,7 @@ You can set **port** in ./config/production.json:
 ##### Quick example with cURL:
 
 ```
-$ curl -X POST -F "pdf=@document.pdf" http://127.0.0.1:3000/api/pdftotext
+$ curl -X POST -F "pdf=@document.pdf" http://127.0.0.1:3000/apidoc
 ```
 
 ##### Response:
@@ -70,6 +91,15 @@ Content-Type: text/plain
 body: raw text
 ```
 
-#### [PM2](http://pm2.keymetrics.io/) usage. Run and config
+#### Use with [PM2](http://pm2.keymetrics.io/). Run and config
 
+###### Coming soon
+
+#### Use with custom queue reverse proxy server. Run and config
+
+###### Coming soon
+
+#### Use with custom server of an automatic composition of atomic web services
+
+###### Coming soon
 
