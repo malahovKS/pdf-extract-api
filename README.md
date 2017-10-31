@@ -19,10 +19,23 @@ $ git clone https://github.com/malakhovks/pdf-extract-api.git
 $ cd pdf-extract-api
 $ ./install-dependencies-ubuntu.sh
 ```
+### Documentation with [apidoc](http://apidocjs.com/)
+
+##### Generate documentation with [apidoc](http://apidocjs.com/):
+
+```
+$ npm run apidoc-generate
+```
+
+##### Use documentation with [apidoc](http://apidocjs.com/):
+
+```
+$ curl -X GET http://127.0.0.1:3000/api/pdftotext
+```
 
 ### Use cases
 
-#### Basic usage. Run and config
+##### Basic usage. Run and config
 
 Run program in **development** mode (default port: 3000; log-mode: development).
 [Winston](https://www.npmjs.com/package/winston) logging level will be set to **debug** and transport debug/info/warning logs to Console:
@@ -59,7 +72,7 @@ You can set **port** in ./config/production.json:
 ##### Quick example with cURL:
 
 ```
-$ curl -X POST -F "pdf=@document.pdf" http://127.0.0.1:3000/api/pdftotext
+$ curl -X POST -F "pdf=@document.pdf" http://127.0.0.1:3000/apidoc
 ```
 
 ##### Response:
