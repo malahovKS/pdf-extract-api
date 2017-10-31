@@ -91,6 +91,11 @@ Content-Type: text/plain
 body: raw text
 ```
 
-#### [PM2](http://pm2.keymetrics.io/) usage. Run and config
+#### Use with [PM2](http://pm2.keymetrics.io/). Run and config
 
+**Coming soon**
+
+#### Use with custom queue reverse proxy server. Run and config
+
+**Coming soon**
 
