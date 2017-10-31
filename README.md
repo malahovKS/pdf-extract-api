@@ -43,7 +43,7 @@ http://127.0.0.1:3000/apidoc/
 
 ### Use cases
 
-##### Basic usage. Run and config
+#### Basic usage. Run and config
 
 Run program in **development** mode (default port: 3000; log-mode: development).
 [Winston](https://www.npmjs.com/package/winston) logging level will be set to **debug** and transport debug/info/warning logs to Console:
