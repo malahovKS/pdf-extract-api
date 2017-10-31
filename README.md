@@ -29,13 +29,13 @@ $ npm run apidoc-generate
 
 ##### Use AWS [apidoc](http://apidocjs.com/) documentation:
 
-**With cURL**
+With cURL
 
 ```
 $ curl -X GET http://127.0.0.1:3000/apidoc/
 ```
 
-**With web browser. Navigate to**
+With web browser. Navigate to
 
 ```
 http://127.0.0.1:3000/apidoc/
