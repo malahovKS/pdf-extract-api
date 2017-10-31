@@ -19,18 +19,26 @@ $ git clone https://github.com/malakhovks/pdf-extract-api.git
 $ cd pdf-extract-api
 $ ./install-dependencies-ubuntu.sh
 ```
-### Documentation with [apidoc](http://apidocjs.com/)
+### AWS Documentation with [apidoc](http://apidocjs.com/)
 
-##### Generate documentation with [apidoc](http://apidocjs.com/):
+##### Generate AWS documentation with [apidoc](http://apidocjs.com/):
 
 ```
 $ npm run apidoc-generate
 ```
 
-##### Use documentation with [apidoc](http://apidocjs.com/):
+##### Use AWS documentation with [apidoc](http://apidocjs.com/):
+
+**With cURL**
 
 ```
-$ curl -X GET http://127.0.0.1:3000/api/pdftotext
+$ curl -X GET http://127.0.0.1:3000/apidoc/
+```
+
+**With web browser. Navigate to**
+
+```
+http://127.0.0.1:3000/apidoc/
 ```
 
 ### Use cases
