@@ -4,8 +4,9 @@ import bodyParser from "body-parser";
 import log from "../libs/log";
 import morgan from "morgan";
 import express from "express";
+import config from "config";
 
-const port = process.env.PORT;
+const port = config.get('port');
 
 module.exports = app => {
 	app.set("port", port);
