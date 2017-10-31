@@ -93,9 +93,9 @@ body: raw text
 
 #### Use with [PM2](http://pm2.keymetrics.io/). Run and config
 
-**Coming soon**
+###### Coming soon
 
 #### Use with custom queue reverse proxy server. Run and config
 
-**Coming soon**
+###### Coming soon
 
