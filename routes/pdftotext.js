@@ -19,9 +19,9 @@ module.exports = app => {
 		log.debug(req.headers);
 
 		if (req.file.originalname.toLowerCase().indexOf(".pdf") === -1) {
-			res.sendStatus(400);
+			res.status(400).send("Wrong file type");
 			fs.unlink(req.file.path);
-			return log.error("400 Error: File upload only supports .pdf filetype");
+			return log.error("400 Error: File upload only supports .pdf file type");
 		}
 
 
