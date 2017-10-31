@@ -14,7 +14,7 @@ To run program you will need:
 
 ##### For [Ubuntu Server Linux](https://www.ubuntu.com/download/server) distribution
 
-Check all Requirements/Dependencies and install if not found
+Check all Requirements/Dependencies and install if not found:
 
 ```
 $ git clone https://github.com/malakhovks/pdf-extract-api.git
@@ -24,15 +24,48 @@ $ ./install-dependencies-ubuntu.sh
 
 ### Use cases
 
-Run service in DEBUG mode (default PORT=3000)
+#### Basic usage. Run and config
+
+Run program in **development** mode (default port: 3000; log-mode: development).
+[Winston](https://www.npmjs.com/package/winston) logging level will be set to **debug** and transport debug/info/warning logs to Console:
 
 ```
-$ npm run start
+$ npm run start-development
 ```
 
-Run service in PRODUCTION mode (default PORT=3000)
+You can set **port** in ./config/development.json:
+
+```
+{
+  "port": 3000,
+  "log-mode": "development"
+}
+```
+
+Run program in **production** mode (default port: 3000; log-mode: production).
+[Winston](https://www.npmjs.com/package/winston) logging level will be set to **error** and transport error logs to Console:
 
 ```
 $ npm run start-production
 ```
+
+You can set **port** in ./config/production.json:
+
+```
+{
+  "port": 3000,
+  "log-mode": "production"
+}
+```
+
+##### Quick example with cURL:
+
+```
+$ curl -X POST -F "pdf=@document.pdf" http://127.0.0.1:3000/api/pdftotext
+```
+**Response:**
+
+HTTP/1.1 200 OK
+Content-Type: text/plain
+body: raw text
 
