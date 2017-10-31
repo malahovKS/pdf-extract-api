@@ -27,7 +27,7 @@ $ ./install-dependencies-ubuntu.sh
 $ npm run apidoc-generate
 ```
 
-##### Use AWS documentation with [apidoc](http://apidocjs.com/):
+##### Use AWS [apidoc](http://apidocjs.com/) documentation:
 
 **With cURL**
 
