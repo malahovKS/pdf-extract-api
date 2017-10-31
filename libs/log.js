@@ -17,7 +17,7 @@ if (MODE === 'production') {
 	});
 }
 
-if (MODE === 'debug') {
+if (MODE === 'development') {
 	log.add(winston.transports.Console, {
 		colorize: true,
 		json: false,
