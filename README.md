@@ -66,4 +66,3 @@ $ curl -X POST -F "pdf=@document.pdf" http://127.0.0.1:3000/api/pdftotext
 HTTP/1.1 200 OK
 Content-Type: text/plain
 body: raw text
-
