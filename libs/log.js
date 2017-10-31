@@ -1,10 +1,13 @@
 import winston from "winston";
+import config from "config";
+
+const MODE = config.get("log-mode");
 
 winston.emitErrs = true;
 const tsFormat = () => (new Date().toLocaleString());
 const log = new winston.Logger({exitOnError: false});
 
-if (process.env.NODE_ENV === 'production') {
+if (MODE === 'production') {
 	log.add(winston.transports.Console, {
 		colorize: true,
 		prettyPrint: true,
@@ -12,7 +15,9 @@ if (process.env.NODE_ENV === 'production') {
 		timestamp: tsFormat,
 		level: 'error'
 	});
-} else {
+}
+
+if (MODE === 'development') {
 	log.add(winston.transports.Console, {
 		colorize: true,
 		json: false,
