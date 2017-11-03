@@ -13,7 +13,7 @@
     "restful-api",
     "rest-api"
   ],
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "Apache-2.0",
   "author": "kirill-malakhov",
   "main": "server.js",
@@ -54,7 +54,7 @@
     "winston": "^2.4.0"
   },
   "engines": {
-    "node": "^6.11.0"
+    "node": "^8.9.0"
   },
   "devDependencies": {
     "apidoc": "^0.17.6"
