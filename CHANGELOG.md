@@ -10,3 +10,4 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ### Changed
 - Migrate to Node.js LTS 8.9.0
+- Fix script to install current Node.js LTS 8.9.0
