@@ -54,7 +54,7 @@
     "winston": "^2.4.0"
   },
   "engines": {
-    "node": "^8.9.0"
+    "node": "^8.9.1"
   },
   "devDependencies": {
     "apidoc": "^0.17.6"
