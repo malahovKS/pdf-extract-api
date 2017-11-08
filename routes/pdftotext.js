@@ -22,12 +22,12 @@ module.exports = app => {
 		log.debug(req.headers);
 
 		if (!req.file) {
-			log.error("400 Error: Cannot read property 'originalname' of undefined");
+			log.error("Cannot read property 'originalname' of undefined");
 			return res.status(400).send("Cannot read property 'originalname' of undefined");
 		}
 
 		if (req.file.originalname.toLowerCase().indexOf(".pdf") === -1) {
-			log.error("400 Error: File upload only supports .pdf file type");
+			log.error("Uploaded filename: " + req.file.originalname);
 			UNLINK(req.file.path)
 				.then(() => {
 					log.debug(req.file.originalname + " deleted.");
@@ -73,39 +73,9 @@ module.exports = app => {
 				log.error(error);
 				return res.sendStatus(500);
 			});
-			log.error("Command pdftotext doesn't exist");
+			log.error("Command pdftotext doesn't exist on the server");
 			return res.sendStatus(500);
 		});
 
 	});
 };
-
-/*
-
-		// commandExists('pdftotext')
-		// 	.then(() => {
-		// 		exec("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", {maxBuffer: 3000 * 1024},
-		// 			(error, stdout, stderr) => {
-		//
-		// 				if (error) {
-		// 					fs.unlink(req.file.path);
-		// 					res.sendStatus(500);
-		// 					log.error(error);
-		// 					return log.error(stderr);
-		// 				}
-		//
-		// 				log.info(req.file.originalname + " Done!");
-		// 				log.debug("\n" + stdout);
-		//
-		// 				fs.unlink(req.file.path);
-		// 				res.type('text/plain');
-		// 				res.status(200).send(stdout.trim());
-		// 				res.flush();
-		//
-		// 			})
-		// 	}).catch(() => {
-		// 	fs.unlink(req.file.path);
-		// 	log.error("Command pdftotext doesn't exist");
-		// 	return res.sendStatus(500);
-		// });
-*/
