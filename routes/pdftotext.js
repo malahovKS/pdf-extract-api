@@ -7,6 +7,7 @@ import {exec} from "child_process";
 
 const UPLOAD = multer({dest: 'public/uploads/'}).single('pdf');
 const EXEC = util.promisify(exec);
+const UNLINK = util.promisify(fs.unlink);
 
 module.exports = app => {
 
@@ -26,10 +27,60 @@ module.exports = app => {
 		}
 
 		if (req.file.originalname.toLowerCase().indexOf(".pdf") === -1) {
-			res.status(400).send("Wrong file type");
-			fs.unlink(req.file.path);
-			return log.error("400 Error: File upload only supports .pdf file type");
+			log.error("400 Error: File upload only supports .pdf file type");
+			UNLINK(req.file.path)
+				.then(() => {
+					log.debug(req.file.originalname + " deleted.");
+				}).catch((error) => {
+				log.error(error);
+				return res.sendStatus(500);
+			});
+			return res.status(400).send("Wrong file type");
 		}
+
+		commandExists('pdftotext')
+			.then(() => {
+				EXEC("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", {maxBuffer: 3000 * 1024})
+					.then(result => {
+						log.debug(req.file.originalname + " Done!");
+						log.debug("\n" + result);
+						UNLINK(req.file.path)
+							.then(() => {
+								log.debug(req.file.originalname + " deleted.");
+							}).catch((error) => {
+							log.error(error);
+							return res.sendStatus(500);
+						});
+						res.type('text/plain');
+						res.status(200).send(result.stdout.trim());
+						res.flush();
+					}).catch((error) => {
+					UNLINK(req.file.path)
+						.then(() => {
+							log.debug(req.file.originalname + " deleted.");
+						}).catch((error) => {
+						log.error(error);
+						return res.sendStatus(500);
+					});
+					log.error(error);
+					return res.sendStatus(500);
+				});
+			}).catch(() => {
+			UNLINK(req.file.path)
+				.then(() => {
+					log.debug(req.file.originalname + " deleted.");
+				}).catch((error) => {
+				log.error(error);
+				return res.sendStatus(500);
+			});
+			log.error("Command pdftotext doesn't exist");
+			return res.sendStatus(500);
+		});
+
+	});
+};
+
+/*
 
 		// commandExists('pdftotext')
 		// 	.then(() => {
@@ -57,51 +108,4 @@ module.exports = app => {
 		// 	log.error("Command pdftotext doesn't exist");
 		// 	return res.sendStatus(500);
 		// });
-
-		EXEC("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", {maxBuffer: 3000 * 1024})
-			.then(result => {
-				log.info(req.file.originalname + " Done!");
-				log.debug("\n" + result);
-				fs.unlink(req.file.path);
-				res.type('text/plain');
-				res.status(200).send(result.stdout.trim());
-				res.flush();
-			})
-			.catch((error) => {
-				fs.unlink(req.file.path, (error) => {
-					if (error) {
-						return error
-					}
-				});
-				log.error(error);
-				return res.sendStatus(500);
-			});
-
-	});
-};
-
-
-// await can only be used within an async function
-/*
-(async () => {
-	try {
-		const fileContents = await readFile('./foo.txt');
-		console.log(fileContents.toString());
-	} catch (ex) {
-		ex => console.error(error)
-	}
-})();
-
-
-		(async () => {
-			try {
-				// const exists = await commandExists('pdftotext');
-				// log.info(exists);
-				const { stdout, stderr } = await EXEC("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", {maxBuffer: 3000 * 1024});
-				log.debug(stdout);
-			} catch (ex) {
-				ex => log.error(error)
-			}
-		})();
-
 */
