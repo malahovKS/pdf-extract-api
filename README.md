@@ -1,6 +1,6 @@
 # Atomic Web Service (AWS, REST API) for converting PDF files to text/plain, powered by [pdftotext](https://en.wikipedia.org/wiki/Pdftotext) and [Node.js](https://nodejs.org)
 
-Part of the ["Automated scientific research workstation"](http://icybcluster.org.ua:34145/) atomic web services ecosystem.
+Part of the ["Personal Research Information System"](http://icybcluster.org.ua:34145/) atomic web services ecosystem.
 
 ### Requirements/Dependencies
 
