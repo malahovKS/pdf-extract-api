@@ -19,7 +19,7 @@
   "main": "server.js",
   "scripts": {
     "start": "NODE_ENV=development babel-node server.js",
-    "start-development": "NODE_ENV=development babel-node server.js",
+    "start-development": "NODE_ENV=development babel-node --trace-deprecation server.js",
     "start-production": "NODE_ENV=production babel-node server.js",
     "apidoc-generate": "apidoc -i routes/ -o public/apidoc",
     "test": "echo \"Error: no test specified\" && exit 1"
