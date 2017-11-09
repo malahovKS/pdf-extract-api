@@ -1,13 +1,13 @@
 import log from "../libs/log";
 import multer from "multer";
-import fs from "fs";
+import {unlink} from "fs";
 import commandExists from "command-exists";
 import util from "util";
 import {exec} from "child_process";
 
-const UPLOAD = multer({dest: 'public/uploads/'}).single('pdf');
-const EXEC = util.promisify(exec);
-const UNLINK = util.promisify(fs.unlink);
+const upload = multer({dest: 'public/uploads/'}).single('pdf');
+const execPdftotxt = util.promisify(exec);
+const fsUnlink = util.promisify(unlink);
 
 module.exports = app => {
 
@@ -17,7 +17,7 @@ module.exports = app => {
 	 * @apiGroup Convert
 	 * @apiSuccess {text/plain} body raw text
 	 */
-	app.post("/api/pdftotext", UPLOAD, (req, res) => {
+	app.post("/api/pdftotext", upload, (req, res) => {
 
 		log.debug(req.headers);
 
@@ -28,7 +28,7 @@ module.exports = app => {
 
 		if (req.file.originalname.toLowerCase().indexOf(".pdf") === -1) {
 			log.error("Uploaded filename: " + req.file.originalname);
-			UNLINK(req.file.path)
+			fsUnlink(req.file.path)
 				.then(() => {
 					log.debug(req.file.originalname + " deleted.");
 				}).catch((error) => {
@@ -40,11 +40,11 @@ module.exports = app => {
 
 		commandExists('pdftotext')
 			.then(() => {
-				EXEC("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", {maxBuffer: 3000 * 1024})
+				execPdftotxt("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", {maxBuffer: 3000 * 1024})
 					.then(result => {
 						log.debug(req.file.originalname + " Done!");
 						log.debug("\n" + result);
-						UNLINK(req.file.path)
+						fsUnlink(req.file.path)
 							.then(() => {
 								log.debug(req.file.originalname + " deleted.");
 							}).catch((error) => {
@@ -55,7 +55,7 @@ module.exports = app => {
 						res.status(200).send(result.stdout.trim());
 						res.flush();
 					}).catch((error) => {
-					UNLINK(req.file.path)
+					fsUnlink(req.file.path)
 						.then(() => {
 							log.debug(req.file.originalname + " deleted.");
 						}).catch((error) => {
@@ -66,7 +66,7 @@ module.exports = app => {
 					return res.sendStatus(500);
 				});
 			}).catch(() => {
-			UNLINK(req.file.path)
+			fsUnlink(req.file.path)
 				.then(() => {
 					log.debug(req.file.originalname + " deleted.");
 				}).catch((error) => {
