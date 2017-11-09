@@ -7,7 +7,7 @@ if ! type "node" > /dev/null 2>&1;
     printf >&2 "node not found! Install? (y/n):";
     read -n1 REPLY
     case $REPLY in
-      y|Y) printf "\n Installing Node.js v8.x . . . \n";
+      y|Y) printf "\n Installing lts Node.js v8.x . . . \n";
             curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
             sudo apt-get install -y nodejs
             node -v
