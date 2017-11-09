@@ -1,10 +1,13 @@
 import log from "../libs/log";
 import multer from "multer";
-import fs from "fs";
-import * as PDFTOTEXT from "child_process";
+import {unlink} from "fs";
 import commandExists from "command-exists";
+import util from "util";
+import {exec} from "child_process";
 
-const UPLOAD = multer({dest: 'public/uploads/'}).single('pdf');
+const upload = multer({dest: 'public/uploads/'}).single('pdf');
+const execPdftotxt = util.promisify(exec);
+const fsUnlink = util.promisify(unlink);
 
 module.exports = app => {
 
@@ -14,42 +17,65 @@ module.exports = app => {
 	 * @apiGroup Convert
 	 * @apiSuccess {text/plain} body raw text
 	 */
-	app.post("/api/pdftotext", UPLOAD, (req, res) => {
+	app.post("/api/pdftotext", upload, (req, res) => {
 
 		log.debug(req.headers);
 
-		if (req.file.originalname.toLowerCase().indexOf(".pdf") === -1) {
-			res.status(400).send("Wrong file type");
-			fs.unlink(req.file.path);
-			return log.error("400 Error: File upload only supports .pdf file type");
+		if (!req.file) {
+			log.error("Cannot read property 'originalname' of undefined");
+			return res.status(400).send("Cannot read property 'originalname' of undefined");
 		}
 
+		if (req.file.originalname.toLowerCase().indexOf(".pdf") === -1) {
+			log.error("Uploaded filename: " + req.file.originalname);
+			fsUnlink(req.file.path)
+				.then(() => {
+					log.debug(req.file.originalname + " deleted.");
+				}).catch((error) => {
+				log.error(error);
+				return res.sendStatus(500);
+			});
+			return res.status(400).send("Wrong file type");
+		}
 
 		commandExists('pdftotext')
 			.then(() => {
-				PDFTOTEXT.exec("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", {maxBuffer: 3000 * 1024},
-					(error, stdout, stderr) => {
-
-						if (error) {
-							fs.unlink(req.file.path);
-							res.sendStatus(500);
+				execPdftotxt("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", {maxBuffer: 3000 * 1024})
+					.then(result => {
+						log.debug(req.file.originalname + " Done!");
+						log.debug("\n" + result);
+						fsUnlink(req.file.path)
+							.then(() => {
+								log.debug(req.file.originalname + " deleted.");
+							}).catch((error) => {
 							log.error(error);
-							return log.error(stderr);
-						}
-
-						log.info(req.file.originalname + " Done!");
-						log.debug("\n" + stdout);
-
-						fs.unlink(req.file.path);
+							return res.sendStatus(500);
+						});
 						res.type('text/plain');
-						res.status(200).send(stdout.trim());
+						res.status(200).send(result.stdout.trim());
 						res.flush();
-
-					})
+					}).catch((error) => {
+					fsUnlink(req.file.path)
+						.then(() => {
+							log.debug(req.file.originalname + " deleted.");
+						}).catch((error) => {
+						log.error(error);
+						return res.sendStatus(500);
+					});
+					log.error(error);
+					return res.sendStatus(500);
+				});
 			}).catch(() => {
-			fs.unlink(req.file.path);
-			res.sendStatus(500);
-			return log.error("500 Error: Command pdftotext doesn't exist");
+			fsUnlink(req.file.path)
+				.then(() => {
+					log.debug(req.file.originalname + " deleted.");
+				}).catch((error) => {
+				log.error(error);
+				return res.sendStatus(500);
+			});
+			log.error("Command pdftotext doesn't exist on the server");
+			return res.sendStatus(500);
 		});
+
 	});
 };
