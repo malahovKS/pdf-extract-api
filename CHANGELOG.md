@@ -4,7 +4,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
-## [0.1.1] - 2017-11-04
+## [0.1.2] - 2017-11-04
 ### Added
 - Start using changelog, all notable changes to this project will be documented in CHANGELOG.md
 
