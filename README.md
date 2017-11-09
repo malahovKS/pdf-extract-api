@@ -8,7 +8,7 @@ Program runs on modern MacOS and Linux distributions.
 To run program you will need:
 
 * [pdftotext](https://en.wikipedia.org/wiki/Pdftotext)
-* [Node.js](https://nodejs.org)
+* Latest LTS [Node.js](https://nodejs.org) 8.x
 
 ### Install
 
