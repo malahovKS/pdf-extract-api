@@ -8,7 +8,7 @@ import {exec} from "child_process";
 const upload = multer({dest: 'public/uploads/'}).single('pdf');
 const execPdftotxt = util.promisify(exec);
 const fsUnlink = util.promisify(unlink);
-
+const outputEncoding = "UTF-8";
 
 module.exports = app => {
 
@@ -46,7 +46,7 @@ module.exports = app => {
 			}
 
 			try {
-				const result = await execPdftotxt("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", {maxBuffer: 3000 * 1024});
+				const result = await execPdftotxt("pdftotext -layout -nopgbrk -raw -eol unix -enc " + outputEncoding + " " + req.file.path + " -", {maxBuffer: 3000 * 1024});
 				await fsUnlink(req.file.path);
 				res.type('text/plain');
 				return res.status(200).send(result.stdout.trim());
