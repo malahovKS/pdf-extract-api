@@ -20,16 +20,6 @@ module.exports = app => {
 	 */
 	app.post("/api/pdftotext", upload, (req, res) => {
 
-
-		// async function removeUploadedFile(pathToFile) {
-		// 	try {
-		// 		await fsUnlink(pathToFile)
-		// 	} catch (ex) {
-		// 		log.error(ex);
-		// 		return res.sendStatus(500)
-		// 	}
-		// }
-
 		log.debug(req.headers);
 
 		if (!req.file) {
