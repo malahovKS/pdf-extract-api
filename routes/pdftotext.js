@@ -9,6 +9,7 @@ const upload = multer({dest: 'public/uploads/'}).single('pdf');
 const execPdftotxt = util.promisify(exec);
 const fsUnlink = util.promisify(unlink);
 
+
 module.exports = app => {
 
 	/**
@@ -19,6 +20,16 @@ module.exports = app => {
 	 */
 	app.post("/api/pdftotext", upload, (req, res) => {
 
+
+		// async function removeUploadedFile(pathToFile) {
+		// 	try {
+		// 		await fsUnlink(pathToFile)
+		// 	} catch (ex) {
+		// 		log.error(ex);
+		// 		return res.sendStatus(500)
+		// 	}
+		// }
+
 		log.debug(req.headers);
 
 		if (!req.file) {
@@ -28,54 +39,34 @@ module.exports = app => {
 
 		if (req.file.originalname.toLowerCase().indexOf(".pdf") === -1) {
 			log.error("Uploaded filename: " + req.file.originalname);
-			fsUnlink(req.file.path)
-				.then(() => {
-					log.debug(req.file.originalname + " deleted.");
-				}).catch((error) => {
-				log.error(error);
-				return res.sendStatus(500);
-			});
+			(async () => {
+				await fsUnlink(req.file.path);
+			})();
 			return res.status(400).send("Wrong file type");
 		}
 
-		commandExists('pdftotext')
-			.then(() => {
-				execPdftotxt("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", {maxBuffer: 3000 * 1024})
-					.then(result => {
-						log.debug(req.file.originalname + " Done!");
-						log.debug("\n" + result);
-						fsUnlink(req.file.path)
-							.then(() => {
-								log.debug(req.file.originalname + " deleted.");
-							}).catch((error) => {
-							log.error(error);
-							return res.sendStatus(500);
-						});
-						res.type('text/plain');
-						res.status(200).send(result.stdout.trim());
-						res.flush();
-					}).catch((error) => {
-					fsUnlink(req.file.path)
-						.then(() => {
-							log.debug(req.file.originalname + " deleted.");
-						}).catch((error) => {
-						log.error(error);
-						return res.sendStatus(500);
-					});
-					log.error(error);
-					return res.sendStatus(500);
-				});
-			}).catch(() => {
-			fsUnlink(req.file.path)
-				.then(() => {
-					log.debug(req.file.originalname + " deleted.");
-				}).catch((error) => {
-				log.error(error);
+		(async () => {
+
+			try {
+				await commandExists('pdftotext');
+			} catch (ex) {
+				log.error("Command pdftotext doesn't exist on the server");
+				await fsUnlink(req.file.path);
 				return res.sendStatus(500);
-			});
-			log.error("Command pdftotext doesn't exist on the server");
-			return res.sendStatus(500);
-		});
+			}
+
+			try {
+				const result = await execPdftotxt("pdftotext -layout -nopgbrk -raw -eol unix " + req.file.path + " -", {maxBuffer: 3000 * 1024});
+				await fsUnlink(req.file.path);
+				res.type('text/plain');
+				return res.status(200).send(result.stdout.trim());
+			} catch (ex) {
+				log.error(ex);
+				await fsUnlink(req.file.path);
+				return res.sendStatus(500);
+			}
+
+		})();
 
 	});
 };
