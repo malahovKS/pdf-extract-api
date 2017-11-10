@@ -18,6 +18,7 @@ module.exports = app => {
 	 * @apiGroup Convert
 	 * @apiSuccess {text/plain} body raw text
 	 */
+
 	app.post("/api/pdftotext", upload, (req, res) => {
 
 		log.debug(req.headers);
