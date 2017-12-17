@@ -8,12 +8,15 @@ if ! type "node" > /dev/null 2>&1;
     read -n1 REPLY
     case $REPLY in
       y|Y) printf "\n Installing lts Node.js v8.x . . . \n";
+            sudo apt-get update
+            sudo apt-get upgrade
             curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
             sudo apt-get install -y nodejs
+            sudo apt-get install -y build-essential
+            sudo npm install npm@latest -g
+            sudo npm install -g n
+            sudo n lts
             node -v
-            npm install -g n
-            n lts
-            npm install npm@latest -g
             npm -v ;;
       n|N) printf "\n Abort \n";
            exit 1 ;;
