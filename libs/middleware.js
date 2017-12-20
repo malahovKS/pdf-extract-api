@@ -21,12 +21,12 @@ module.exports = app => {
 
 	app.disable('x-powered-by');
 	app.use(compression());
-	app.use(bodyParser.json({limit: '5mb'}));
-	app.use(bodyParser.text({limit: '5mb'}));
+	//app.use(bodyParser.json({limit: '5mb'}));
+	//app.use(bodyParser.text({limit: '5mb'}));
+	app.use(bodyParser.raw({limit: '5mb', type: 'application/pdf'}));
 	app.use('/api', cors({
 		methods:["POST", "GET"]
 	}));
-	app.use(express.static("public"));
 
 	//--- catch 404 & 500
 	app.use((req, res) => {

@@ -1,6 +1,6 @@
 import log from "../libs/log";
 import multer from "multer";
-import {unlink} from "fs";
+import {unlink, writeFile} from "fs";
 import commandExists from "command-exists";
 import util from "util";
 import {exec} from "child_process";
@@ -8,6 +8,7 @@ import {exec} from "child_process";
 const upload = multer({dest: 'public/uploads/'}).single('pdf');
 const execPdftotxt = util.promisify(exec);
 const fsUnlink = util.promisify(unlink);
+const fsWriteFile = util.promisify(writeFile);
 
 
 module.exports = app => {
@@ -57,6 +58,27 @@ module.exports = app => {
 			}
 
 		})();
+
+	});
+
+	app.post("/upload/v2/pdf", (req, res) => {
+
+		log.debug(req.headers);
+		let data = new Buffer('');
+		req.on('data', (chunk) => {
+			data = Buffer.concat([data, chunk]);
+		});
+		req.on('end', () => {
+			req.rawBody = data;
+			(async () => {
+				try {
+					await fsWriteFile('./public/uploads/1.pdf', req.rawBody, 'binary');
+					return res.sendStatus(200);
+				} catch (ex) {
+					return res.sendStatus(500);
+				}
+			})();
+		});
 
 	});
 };
