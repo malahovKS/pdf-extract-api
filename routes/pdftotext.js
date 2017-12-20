@@ -13,12 +13,12 @@ const fsUnlink = util.promisify(unlink);
 module.exports = app => {
 
 	/**
-	 * @api {post} /api/pdftotext pdf file to text/plain
+	 * @api {post} /upload/v1/pdf pdf file to text/plain
 	 * @apiParam {multipart/form-data} pdf pdf file
 	 * @apiGroup Convert
 	 * @apiSuccess {text/plain} body raw text
 	 */
-	app.post("/api/pdftotext", upload, (req, res) => {
+	app.post("/upload/v1/pdf", upload, (req, res) => {
 
 		log.debug(req.headers);
 
