@@ -80,7 +80,7 @@ You can set **port** in ./config/production.json:
 ##### Quick example with cURL:
 
 ```
-$ curl -X POST -F "pdf=@document.pdf" http://127.0.0.1:3000/api/pdftotext
+$ curl -X POST -F "pdf=@document.pdf" http://127.0.0.1:3000/upload/v1/pdf
 ```
 
 ##### Response:
