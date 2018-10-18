@@ -68,3 +68,4 @@ typings/
 
 #Ignore public uploads
 /public/uploads/*
+/public/apidoc/*
